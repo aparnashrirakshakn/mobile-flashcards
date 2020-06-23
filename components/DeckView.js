@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { getData } from '../utils/api'
 
 export default class DeckView extends Component {
     render() {
+        const deck = this.props.route.params.entryId
+        const decks = getData()
+
         return(
             <View style={styles.container}>
-                <Text>Hi form DECK VIEW</Text>
+                <Text>{decks[deck].title}</Text>
+                <Text>{decks[deck].questions.length}</Text>
             </View>
         )
     }
