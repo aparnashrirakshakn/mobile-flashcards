@@ -1,29 +1,41 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { getData } from '../utils/api'
+import { StyleSheet, Text, View, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import ActionButton from './ActionButton'
-import { withOrientation } from 'react-navigation'
 import { purple, white, red, orange } from '../utils/colors'
 
 class DeckView extends Component {
+
+    componentWillMount() {
+        this.animatedValue = new Animated.Value(0.3)
+    }
+
+    componentDidMount() {
+        Animated.timing(this.animatedValue, {
+            toValue: 1,
+            duration: 3000
+        }).start()     
+    }
+
     render() {
+        const animatedStyle = { opacity: this.animatedValue }
         const deck = this.props.route.params.entryId
         const { decks } = this.props
 
         return(
             <View style={styles.container}>
-                <View style={styles.card}>
+                <Animated.View style={[styles.card, animatedStyle]}>
                     <Text style={styles.mainText}>{decks[deck].title}</Text>
                     <Text style={styles.subText}>{decks[deck].questions.length}</Text>
 
                     <ActionButton style={styles} text={'Add Card'} 
                                 color={purple} 
                                 onPress={() => this.props.navigation.navigate('Add Card', {entryId: deck})}/>
-                    <ActionButton style={styles} text={'Start Quiz'} 
+                    
+                    {decks[deck].questions.length > 0 && <ActionButton style={styles} text={'Start Quiz'} 
                                 color={red} 
-                                onPress={() => this.props.navigation.navigate('Quiz', {entryId: deck})}/>
-                </View>
+                                onPress={() => this.props.navigation.navigate('Quiz', {entryId: deck})}/>}
+                </Animated.View>
             </View>
         )
     }

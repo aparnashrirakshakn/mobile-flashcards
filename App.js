@@ -10,6 +10,7 @@ import Constants from 'expo-constants'
 import { purple, white } from './utils/colors'
 
 import reducer from './reducers'
+import { setLocalNotification } from './utils/notifications'
 
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
@@ -47,7 +48,7 @@ function MyTab() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'blue',
+        activeTintColor: 'purple',
         inactiveTintColor: 'gray',
       }}
     >
@@ -76,6 +77,11 @@ function MyStack() {
 }
 
 export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return(
       <Provider store={createStore(reducer)}>

@@ -6,6 +6,7 @@ import { SubmitButton } from './SubmitButton'
 import { connect } from 'react-redux'
 import ActionButton from './ActionButton'
 import ShowAnswerButton from './ShowAnswerButton'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 class Quiz extends Component {
 
@@ -15,6 +16,19 @@ class Quiz extends Component {
         correct: 0,
         incorrect: 0
     }
+
+    componentDidMount() {
+        clearLocalNotification().then(setLocalNotification);
+    }
+
+    resetQuiz = () => (
+        this.setState({
+            questionNumber: 0,
+            showAnswer: false,
+            correct: 0,
+            incorrect: 0
+        })
+    )
 
     showAnswer = () => (
         !this.state.showAnswer ? this.setState({showAnswer: true}) : this.setState({showAnswer: false})
@@ -49,8 +63,8 @@ class Quiz extends Component {
                 <View style={styles.container}>
                     <View style={styles.card}>
                         <Text style={styles.mainText}>You got {this.state.correct} out of {decks[deck].questions.length} !</Text>
-                        <ActionButton style={styles} text={'Restart Quiz'} color={red} />
-                        <ActionButton style={styles} text={'Back To Deck'} color={green} />
+                        <ActionButton style={styles} text={'Restart Quiz'} color={red} onPress={this.resetQuiz}/>
+                        <ActionButton style={styles} text={'Back To Deck'} color={green} onPress={() => this.props.navigation.navigate('Deck View', {entryId: deck})}/>
                     </View>
                 </View>
             )
