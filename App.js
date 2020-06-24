@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
-
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import Constants from 'expo-constants'
 import { purple, white } from './utils/colors'
 
 import reducer from './reducers'
@@ -18,6 +18,14 @@ import AddCard from './components/AddCard'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+function MyStatusBar({backgroundColor, ...props}) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+    </View>
+  )
+}
 
 function MyTab() {
   return (
@@ -71,6 +79,7 @@ export default class App extends Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <NavigationContainer>
+            <MyStatusBar backgroundColor={purple} barStyle='light-content'/>
             <MyStack />
           </NavigationContainer>
         </View>

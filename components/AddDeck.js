@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        color: '#333'
+        color: '#333',
+        textAlign: 'center'
     },
     submitBtn: {
         borderWidth: 0.5,
