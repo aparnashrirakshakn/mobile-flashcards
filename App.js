@@ -8,6 +8,9 @@ import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icon
 import { purple, white } from './utils/colors'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView';
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import { createStore } from 'redux'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -53,11 +56,13 @@ function MyStack() {
 export default class App extends Component {
   render() {
     return(
-      <View style={{flex: 1}}>
-        <NavigationContainer>
-          <MyStack />
-        </NavigationContainer>
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <NavigationContainer>
+            <MyStack />
+          </NavigationContainer>
+        </View>
+      </Provider>
     )
   }
 }

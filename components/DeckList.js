@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { getData } from '../utils/api'
+import { getData, getDecks } from '../utils/api'
+import { connect } from 'react-redux'
+import { receiveDecks } from '../actions/index'
 
-export default class DeckList extends Component {
+class DeckList extends Component {
+
+    componentDidMount() {
+        getDecks()
+            .then(decks => this.props.receiveAllDecks(decks))
+    }
     render() {
-        const decks = getData()
+        const { decks } = this.props
 
         return(
             <View style={styles.container}>
+                <Text>Hi</Text>
                 {Object.keys(decks).map((deck) => {
                     const { title, questions } = decks[deck]
                     return(
@@ -31,3 +39,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
+
+function mapDispatchToProps(dispatch) {
+    return {
+        receiveAllDecks: (decks) => dispatch(receiveDecks(decks))
+    }
+}
+
+function mapStateToProps( decks ) {
+    decks = { decks }
+    return decks
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
