@@ -22,7 +22,7 @@ class DeckList extends Component {
                             <Text>{title}</Text>
                             <Text>{questions.length} Questions</Text>
                             <Button title='View Deck'
-                                    onPress={() => this.props.navigation.navigate('DeckView', {entryId: deck})}></Button>
+                                    onPress={() => this.props.navigation.navigate('Deck View', {entryId: deck})}></Button>
                         </View>
                     )
                 })}

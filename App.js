@@ -3,14 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import DeckList from './components/DeckList'
-import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
-import { purple, white } from './utils/colors'
-import AddDeck from './components/AddDeck'
-import DeckView from './components/DeckView';
 import { Provider } from 'react-redux'
-import reducer from './reducers'
 import { createStore } from 'redux'
+import { FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
+
+import { purple, white } from './utils/colors'
+
+import reducer from './reducers'
+
+import DeckList from './components/DeckList'
+import AddDeck from './components/AddDeck'
+import DeckView from './components/DeckView'
+import AddCard from './components/AddCard'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -46,9 +50,17 @@ function MyTab() {
 
 function MyStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={MyTab} />
-      <Stack.Screen name="DeckView" component={DeckView} />
+    <Stack.Navigator 
+      navigationOptions={({ route }) => ({
+        title: {route},
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple
+        }
+      })}>
+      <Stack.Screen name="Deck List" component={MyTab} />
+      <Stack.Screen name="Deck View" component={DeckView} />
+      <Stack.Screen name="Add Card" component={AddCard} />
     </Stack.Navigator>
   );
 }

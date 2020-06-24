@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native'
 import { saveDeckTitle } from '../utils/api'
+import { orange } from '../utils/colors'
 import { addDeck } from '../actions/index'
 import { connect } from 'react-redux'
+import SubmitButton from '../components/SubmitButton'
 
 class AddDeck extends Component {
 
@@ -15,7 +17,7 @@ class AddDeck extends Component {
 
         saveDeckTitle(text)
         this.props.dispatch(addDeck(text))
-        this.props.navigation.navigate('DeckView', {entryId: text})
+        this.props.navigation.navigate('Deck View', {entryId: text})
         this.setState({text: ''})
     }
     render() {
@@ -25,9 +27,7 @@ class AddDeck extends Component {
                 <TextInput style={styles.input} onChangeText={(text) => this.setState({text: text})} value={this.state.text}>
 
                 </TextInput>
-                <Button style={styles.submitBtn} onPress={this.submitName} title='Submit'>
-
-                </Button>
+                <SubmitButton style={styles.submitBtn} onPress={(this.submitName)} />
             </View>
         )
     }
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         borderColor: '#d6d7da',
         padding: 10,
         borderRadius: 7,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: orange
 
     }
 })

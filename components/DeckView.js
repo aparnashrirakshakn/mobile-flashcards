@@ -18,7 +18,7 @@ class DeckView extends Component {
 
                 <ActionButton styles={styles} text={'Add Card'} 
                               color={purple} 
-                              onPress={() => this.props.navigation.navigate('AddCard', {entryId: deck})}/>
+                              onPress={() => this.props.navigation.navigate('Add Card', {entryId: deck})}/>
                 <ActionButton styles={styles} text={'Start Quiz'} 
                               color={red} 
                               onPress={() => this.props.navigation.navigate('Quiz', {entryId: deck})}/>
