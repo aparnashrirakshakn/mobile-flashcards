@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 
-export default function ActionButton({ onPress, styles, text, color }) {
+export default function ActionButton({ onPress, style, text, color }) {
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.iosBtn, {backgroundColor: color}]}>
-            <Text style={styles.submitBtnText}>{text}</Text>
+        <TouchableOpacity onPress={onPress} style={[style.iosBtn, {backgroundColor: color}]}>
+            <Text style={style.submitBtnText}>{text}</Text>
         </TouchableOpacity>
     )
 }

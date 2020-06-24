@@ -15,6 +15,7 @@ import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -69,6 +70,7 @@ function MyStack() {
       <Stack.Screen name="Deck List" component={MyTab} />
       <Stack.Screen name="Deck View" component={DeckView} />
       <Stack.Screen name="Add Card" component={AddCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   );
 }
