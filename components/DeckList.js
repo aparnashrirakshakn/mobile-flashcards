@@ -15,7 +15,6 @@ class DeckList extends Component {
 
         return(
             <View style={styles.container}>
-                <Text>Hi</Text>
                 {Object.keys(decks).map((deck) => {
                     const { title, questions } = decks[deck]
                     return(
