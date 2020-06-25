@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native'
 import { saveDeckTitle } from '../utils/api'
-import { orange } from '../utils/colors'
+import { blue, white } from '../utils/colors'
 import { addDeck } from '../actions/index'
 import { connect } from 'react-redux'
 import SubmitButton from '../components/SubmitButton'
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     input: {
-        width: 200,
+        width: 350,
         height: 44,
         padding: 8,
         borderWidth: 1,
@@ -57,9 +57,15 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#d6d7da',
         padding: 10,
+        backgroundColor: blue,
         borderRadius: 7,
         overflow: 'hidden',
-        backgroundColor: orange
+        height: 45,
+        margin: 5,
+        width: 170,
+        color: white,
+        fontSize: 22,
+        textAlign: 'center'
 
     }
 })

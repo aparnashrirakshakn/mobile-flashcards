@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavigationActions } from 'react-navigation'
 import { StyleSheet, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import { orange, white, purple, red, green } from '../utils/colors'
+import { blue, white, purple, red, green } from '../utils/colors'
 import { SubmitButton } from './SubmitButton'
 import { connect } from 'react-redux'
 import ActionButton from './ActionButton'
@@ -63,8 +63,8 @@ class Quiz extends Component {
                 <View style={styles.container}>
                     <View style={styles.card}>
                         <Text style={styles.mainText}>You got {this.state.correct} out of {decks[deck].questions.length} !</Text>
-                        <ActionButton style={styles} text={'Restart Quiz'} color={red} onPress={this.resetQuiz}/>
-                        <ActionButton style={styles} text={'Back To Deck'} color={green} onPress={() => this.props.navigation.navigate('Deck View', {entryId: deck})}/>
+                        <ActionButton style={styles} text={'Restart'} color={red} onPress={this.resetQuiz}/>
+                        <ActionButton style={styles} text={'Back'} color={green} onPress={() => this.props.navigation.navigate('Deck View', {entryId: deck})}/>
                     </View>
                 </View>
             )
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
-        backgroundColor: orange,
+        backgroundColor: blue,
         alignSelf: 'stretch',
         borderRadius: 10,
         shadowColor: 'rgba(0,0,0,0.34)',

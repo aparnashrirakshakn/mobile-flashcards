@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import Constants from 'expo-constants'
-import { purple, white } from './utils/colors'
+import { purple, white, yellow } from './utils/colors'
 
 import reducer from './reducers'
 import { setLocalNotification } from './utils/notifications'
@@ -48,8 +48,11 @@ function MyTab() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'purple',
+        activeTintColor: '#48b1ed',
         inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: '#f9cb33',
+        },
       }}
     >
       <Tab.Screen name="Decks" component={DeckList} />
@@ -65,7 +68,7 @@ function MyStack() {
         title: {route},
         headerTintColor: white,
         headerStyle: {
-          backgroundColor: purple
+          backgroundColor: yellow
         }
       })}>
       <Stack.Screen name="Deck List" component={MyTab} />
@@ -87,7 +90,7 @@ export default class App extends Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <NavigationContainer>
-            <MyStatusBar backgroundColor={purple} barStyle='light-content'/>
+            <MyStatusBar backgroundColor={yellow} barStyle='light-content'/>
             <MyStack />
           </NavigationContainer>
         </View>

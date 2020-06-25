@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import ActionButton from './ActionButton'
-import { purple, white, red, orange } from '../utils/colors'
+import { purple, white, red, blue } from '../utils/colors'
 
 class DeckView extends Component {
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
-        backgroundColor: orange,
+        backgroundColor: blue,
         alignSelf: 'stretch',
         borderRadius: 10,
         shadowColor: 'rgba(0,0,0,0.34)',
