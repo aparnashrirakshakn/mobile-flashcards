@@ -25,3 +25,6 @@ The app will allow users to create different categories of flashcards called "de
 6. When the last question is answered, a score is displayed. This can be displayed as a percentage of correct answers or just the number of questions answered correctly.
 7. When the score is displayed, buttons are displayed to either start the quiz over or go back to the Individual Deck view.
 8. Both the 'Restart Quiz' and 'Back to Deck' buttons route correctly to their respective views.
+
+## Testing
+This project has been tested on both iOS and Android
