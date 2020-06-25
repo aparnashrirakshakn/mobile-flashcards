@@ -1,19 +1,102 @@
-import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, StatusBar} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import Constants from 'expo-constants'
+import { purple, white, yellow } from './utils/colors'
 
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
+import reducer from './reducers'
+import { setLocalNotification } from './utils/notifications'
 
-export default function App() {
+import DeckList from './components/DeckList'
+import AddDeck from './components/AddDeck'
+import DeckView from './components/DeckView'
+import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function MyStatusBar({backgroundColor, ...props}) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to React Native!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
     </View>
+  )
+}
+
+function MyTab() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Decks') {
+            iconName = focused
+              ? 'cards'
+              : 'cards-outline';
+          } else if (route.name === 'Add Deck') {
+            iconName = focused ? 'plus-box' : 'plus-outline';
+          }
+
+          return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#48b1ed',
+        inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: '#f9cb33',
+        },
+      }}
+    >
+      <Tab.Screen name="Decks" component={DeckList} />
+      <Tab.Screen name="Add Deck" component={AddDeck} />
+    </Tab.Navigator>
+  )
+}
+
+function MyStack() {
+  return (
+    <Stack.Navigator 
+      navigationOptions={({ route }) => ({
+        title: {route},
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: yellow
+        }
+      })}>
+      <Stack.Screen name="Deck List" component={MyTab} />
+      <Stack.Screen name="Deck View" component={DeckView} />
+      <Stack.Screen name="Add Card" component={AddCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
+    </Stack.Navigator>
   );
+}
+
+export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
+  render() {
+    return(
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <NavigationContainer>
+            <MyStatusBar backgroundColor={yellow} barStyle='light-content'/>
+            <MyStack />
+          </NavigationContainer>
+        </View>
+      </Provider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -22,15 +105,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
